@@ -11,7 +11,7 @@ import useTradingViewWidget from '@/hooks/useTradingViewWidget';
 
 // Types
 interface TradingViewProps {
-  title: string;
+  title?: string;
   scriptUrl: string;
   config: Record<string, unknown>;
   height?: number;
