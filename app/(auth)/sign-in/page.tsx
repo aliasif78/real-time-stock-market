@@ -1,16 +1,23 @@
 'use client';
 
+// Next Js
+import { useRouter } from 'next/navigation';
+
 // Dependencies
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 // Shadcn
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 // Components
 import InputField from '@/components/forms/InputField';
 import FooterLink from '@/components/forms/FooterLink';
+import { signInWithEmail } from '@/lib/actions/auth.actions';
 
 const SignIn = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -23,11 +30,19 @@ const SignIn = () => {
     mode: 'onBlur',
   });
 
-  const onSubmit = async (data: SignInFormData) => {
+  const onSubmit: SubmitHandler<SignInFormData> = async (data: SignInFormData) => {
     try {
-      console.log(data);
-    } catch (e) {
-      console.error(e);
+      const res = await signInWithEmail(data);
+
+      if (res.success) {
+        toast.success('Signed in successfully');
+        router.push('/');
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error('Failed to sign in', {
+        description: error instanceof Error ? error.message : 'Failed to sign in',
+      });
     }
   };
 
