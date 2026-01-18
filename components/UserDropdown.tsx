@@ -14,21 +14,20 @@ import { LogOut } from 'lucide-react';
 // Data
 import NavItems from './NavItems';
 
-const UserDropdown = () => {
+// Server Actions
+import { signOut } from '@/lib/actions/auth.actions';
+
+const UserDropdown = ({ user }: { user: User | null }) => {
   // Hooks
   const router = useRouter();
 
   // Functions
   const handleSignOut = async () => {
+    await signOut();
     router.push('/sign-in');
   };
 
-  // Dummy Data
-  const user = {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    avatar: 'https://via.placeholder.com/150',
-  };
+  if (!user) return null;
 
   return (
     <DropdownMenu>

@@ -1,7 +1,11 @@
 'use client';
 
+// Next Js
+import { useRouter } from 'next/navigation';
+
 // Dependencies
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { toast } from 'sonner';
 
 // Shadcn
 import { Button } from '@/components/ui/button';
@@ -15,7 +19,12 @@ import SelectField from '@/components/forms/SelectField';
 import { CountrySelectField } from '@/components/forms/CountrySelectField';
 import FooterLink from '@/components/forms/FooterLink';
 
+// Server Actions
+import { signUpWithEmail } from '@/lib/actions/auth.actions';
+
 const SignUp = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -35,9 +44,17 @@ const SignUp = () => {
 
   const onSubmit: SubmitHandler<SignUpFormData> = async (data: SignUpFormData) => {
     try {
-      console.log(data);
+      const res = await signUpWithEmail(data);
+
+      if (res.success) {
+        toast.success('Account created successfully');
+        router.push('/');
+      }
     } catch (error) {
       console.log(error);
+      toast.error('Failed to create account', {
+        description: error instanceof Error ? error.message : 'Failed to create account',
+      });
     }
   };
 
