@@ -14,12 +14,16 @@ import { LogOut } from 'lucide-react';
 // Data
 import NavItems from './NavItems';
 
+// Server Actions
+import { signOut } from '@/lib/actions/auth.actions';
+
 const UserDropdown = ({ user }: { user: User | null }) => {
   // Hooks
   const router = useRouter();
 
   // Functions
   const handleSignOut = async () => {
+    await signOut();
     router.push('/sign-in');
   };
 
