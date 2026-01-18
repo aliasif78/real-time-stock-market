@@ -1,15 +1,15 @@
 // Next Js
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
 
 // Components
-import NavItems from "./NavItems";
-import UserDropdown from "./UserDropdown";
+import NavItems from './NavItems';
+import UserDropdown from './UserDropdown';
 
-const Header = () => {
+const Header = ({ user }: { user: User | null }) => {
   return (
-    <header className="sticky top-0 header">
-      <div className="container header-wrapper">
+    <header className="header sticky top-0">
+      <div className="header-wrapper container">
         <Link href="/">
           <Image src="/assets/icons/logo.svg" alt="Signalist Logo" width={140} height={140} />
         </Link>
@@ -18,7 +18,7 @@ const Header = () => {
           <NavItems />
         </nav>
 
-        <UserDropdown />
+        <UserDropdown user={user} />
       </div>
     </header>
   );
