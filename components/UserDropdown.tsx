@@ -1,33 +1,20 @@
 'use client';
 
-// Next Js
-import { useRouter } from 'next/navigation';
-
-// Shadcn
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Button } from './ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-
-// Icons
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 import { LogOut } from 'lucide-react';
-
-// Data
-import NavItems from './NavItems';
-
-// Server Actions
+import NavItems from '@/components/NavItems';
 import { signOut } from '@/lib/actions/auth.actions';
 
-const UserDropdown = ({ user }: { user: User | null }) => {
-  // Hooks
+const UserDropdown = ({ user, initialStocks }: { user: User; initialStocks: StockWithWatchlistStatus[] }) => {
   const router = useRouter();
 
-  // Functions
   const handleSignOut = async () => {
     await signOut();
     router.push('/sign-in');
   };
-
-  if (!user) return null;
 
   return (
     <DropdownMenu>
@@ -37,43 +24,35 @@ const UserDropdown = ({ user }: { user: User | null }) => {
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback className="bg-yellow-500 text-sm font-bold text-yellow-900">{user.name[0]}</AvatarFallback>
           </Avatar>
-
           <div className="hidden flex-col items-start md:flex">
             <span className="text-base font-medium text-gray-400">{user.name}</span>
           </div>
         </Button>
       </DropdownMenuTrigger>
-
       <DropdownMenuContent className="text-gray-400">
         <DropdownMenuLabel>
           <div className="relative flex items-center gap-3 py-2">
-            <Avatar className="size-10">
-              <AvatarImage src="https://github.com/shadcn.png" />
+            <Avatar className="h-10 w-10">
+              <AvatarImage src="https://avatars.githubusercontent.com/u/153423955?s=280&v=4" />
               <AvatarFallback className="bg-yellow-500 text-sm font-bold text-yellow-900">{user.name[0]}</AvatarFallback>
             </Avatar>
-
             <div className="flex flex-col">
               <span className="text-base font-medium text-gray-400">{user.name}</span>
               <span className="text-sm text-gray-500">{user.email}</span>
             </div>
           </div>
         </DropdownMenuLabel>
-
         <DropdownMenuSeparator className="bg-gray-600" />
-
-        <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-base font-medium text-gray-100 transition-colors focus:bg-transparent focus:text-yellow-500">
-          <LogOut className="mr-2 hidden size-4 sm:block" />
+        <DropdownMenuItem onClick={handleSignOut} className="text-md cursor-pointer font-medium text-gray-100 transition-colors focus:bg-transparent focus:text-yellow-500">
+          <LogOut className="mr-2 hidden h-4 w-4 sm:block" />
           Logout
         </DropdownMenuItem>
-
         <DropdownMenuSeparator className="hidden bg-gray-600 sm:block" />
-
         <nav className="sm:hidden">
-          <NavItems />
+          <NavItems initialStocks={initialStocks} />
         </nav>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 };
-
 export default UserDropdown;

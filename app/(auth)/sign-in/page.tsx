@@ -51,7 +51,7 @@ const SignIn = () => {
       <h1 className="form-title">Welcome back</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        <InputField name="email" label="Email" placeholder="contact@jsmastery.com" register={register} error={errors.email} validation={{ required: 'Email is required', pattern: /^\w+@\w+\.\w+$/ }} />
+        <InputField name="email" label="Email" placeholder="contact@gmail.com" register={register} error={errors.email} validation={{ required: 'Email is required', pattern: /^\w+@\w+\.\w+$/ }} />
         <InputField name="password" label="Password" placeholder="Enter your password" type="password" register={register} error={errors.password} validation={{ required: 'Password is required', minLength: 8 }} />
 
         <Button type="submit" disabled={isSubmitting} className="yellow-btn mt-5 w-full">
