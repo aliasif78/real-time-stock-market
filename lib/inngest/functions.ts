@@ -6,7 +6,7 @@ import { inngest } from './client';
 import { NEWS_SUMMARY_EMAIL_PROMPT, PERSONALIZED_WELCOME_EMAIL_PROMPT } from './prompts';
 import { formatDateToday } from '../utils';
 
-export const sendSignUpEmail = inngest.createFunction({ id: 'sign-up-email' }, { event: 'app/user.created' }, async ({ event, step }) => {
+export const sendSignUpEmail = inngest.createFunction({ id: 'sign-up-email', triggers: [{ event: 'app/user.created' }] }, async ({ event, step }) => {
   const userProfile = `
     - Country: ${event.data.country}
     - Investment Goals: ${event.data.investmentGoals}
@@ -36,8 +36,10 @@ export const sendSignUpEmail = inngest.createFunction({ id: 'sign-up-email' }, {
 });
 
 export const sendDailyNewsSummary = inngest.createFunction(
-  { id: 'daily-news-summary' },
-  [{ event: 'app/send.daily.news' }, { cron: '0 12 * * *' }], // 12 PM UTC daily
+  {
+    id: 'daily-news-summary',
+    triggers: [{ event: 'app/send.daily.news' }, { cron: '0 12 * * *' }],
+  },
   async ({ event, step }) => {
     // 1. Get all users for new delivery
     const users = await step.run('get-all-users', getAllUsersForNewsEmail);
