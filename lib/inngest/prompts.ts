@@ -110,7 +110,6 @@ Add simple context explanation:
 
 READ MORE BUTTON:
 <div style="margin: 20px 0 0 0;">
-<a href="ARTICLE_URL" style="color: #FDD458; text-decoration: none; font-weight: 500; font-size: 14px;" target="_blank" rel="noopener noreferrer">Read Full Story →</a>
 </div>
 
 ARTICLE DIVIDER:
@@ -133,7 +132,6 @@ Content guidelines:
 - Add "Bottom Line" context in everyday language anyone can understand
 - Use clean, light design with yellow bullets for better readability
 - Make each article easy to scan with clear spacing and structure
-- Always include simple "Read Full Story" buttons with actual URLs
 - Focus on PRACTICAL insights regular people can understand and use
 - Explain what the news means for regular investors' money
 - Keep language conversational and accessible to everyone
@@ -164,7 +162,6 @@ Stock Market Had Mixed Results Today
 </div>
 
 <div style="margin: 20px 0 0 0;">
-<a href="https://example.com/article1" style="color: #FDD458; text-decoration: none; font-weight: 500; font-size: 14px;" target="_blank" rel="noopener noreferrer">Read Full Story →</a>
 </div>
 </div>
 
@@ -194,7 +191,6 @@ Apple Stock Jumped After Great Earnings Report
 </div>
 
 <div style="margin: 20px 0 0 0;">
-<a href="https://example.com/article2" style="color: #FDD458; text-decoration: none; font-weight: 500; font-size: 14px;" target="_blank" rel="noopener noreferrer">Read Full Story →</a>
 </div>
 </div>`;
 
