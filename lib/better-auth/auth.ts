@@ -3,9 +3,9 @@ import { mongodbAdapter } from 'better-auth/adapters/mongodb';
 import { connectToDatabase } from '@/database/mongoose';
 import { nextCookies } from 'better-auth/next-js';
 
-let authInstance: ReturnType<typeof betterAuth> | null = null;
+let authInstance: ReturnType<typeof betterAuth> | undefined;
 
-export const getAuth = async () => {
+export const getAuth = async (): Promise<ReturnType<typeof betterAuth>> => {
   if (authInstance) return authInstance;
 
   const mongoose = await connectToDatabase();
@@ -26,7 +26,7 @@ export const getAuth = async () => {
       autoSignIn: true,
     },
     plugins: [nextCookies()],
-  });
+  }) as unknown as ReturnType<typeof betterAuth>;
 
   return authInstance;
 };
